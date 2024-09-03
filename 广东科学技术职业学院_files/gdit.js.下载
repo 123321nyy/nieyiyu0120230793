@@ -1,0 +1,98 @@
+// JavaScript Document
+$(function () {
+
+	$("<li><a href='https://www.gdit.edu.cn/bmsz/list.htm' target='_blank'>机构设置</a></li>").insertAfter(".nav>li:first");
+
+	$(".nav>li").mouseover(function () {
+		x = $(this).position();
+		y = x.left + 10 + "px";
+		$(".navbar-nav>.underline").css("left", y);
+	});
+$(".nav>li").eq(3).find(".dropdown-menu li").hover(function() {
+		$(this).siblings().find('.dropdown-menu').stop(true,true).slideUp(150)
+		$(this).children('.dropdown-menu').stop(true,true).slideDown(200);
+		$(this).addClass('hover');
+	}, function() {
+		$(this).children('.dropdown-menu').stop(true,true).slideUp(150);
+		$(this).removeClass('hover');
+    });
+	$("#tab1>li").mouseover(function () {
+		$(this).addClass("redtab").siblings("li").removeClass();
+		var indexNO = $(this).index();
+		$("#con1 > div").eq(indexNO).show().siblings().hide();
+
+		Tx = $(this).position();
+		Ty = Tx.left + 150 + "px";
+		$("#tab1 .triangle").css("left", Ty);
+	});
+
+	$("#tab2>li").mouseover(function () {
+		$(this).addClass("bluetab").siblings("li").removeClass();
+		var indexNO = $(this).index();
+		$("#con2 > div").eq(indexNO).show().siblings().hide();
+
+		Tx = $(this).position();
+		Ty = Tx.left + 135 + "px";
+		$("#tab2 .undertriangle").css("left", Ty);
+	});
+
+	$(".zhuanti>li").hover(function () {
+		$(this).children("span").show();
+		$(this).siblings().children("span").hide();
+	});
+
+	$(".KX_headline>div").first().removeClass("col-sm-3").addClass("col-sm-9");
+
+	$("#carousel1 .carousel-indicators>li").first().addClass("active");
+	$("#carousel1 .carousel-inner>div.item").first().addClass("active");
+	$("#carousel1 .carousel-indicators>li:eq(0)>i").addClass("icon-guojihua");
+	$("#carousel1 .carousel-indicators>li:eq(1)>i").addClass("icon-hezuo1");
+	$("#carousel1 .carousel-indicators>li:eq(2)>i").addClass("icon-gaoshou");
+	$("#carousel1 .carousel-indicators>li:eq(3)>i").addClass("icon-tishengyonghutiyan");
+	$("#carousel1 .carousel-indicators>li:eq(4)>i").addClass("icon-wenhuajianshe");
+	var flag = 0;
+	$("#carousel1 .carousel-indicators>li").each(function () {
+		$(this).attr("data-slide-to", flag);
+		flag++;
+	});
+
+	$("#campus>li:lt(4)").remove();
+	$("#MT>li:lt(3)").remove();
+	$("#carousel2 .carousel-inner>div.item").first().addClass("active");
+
+	$('.newsItem>.newsDate').html(function (n, t) {
+		var timesList = t.split('-');
+		var year = timesList[0];
+		var month = timesList[1];
+		var day = timesList[2];
+		var data = month+'-'+day+' <span>'+year+'</span>';
+		return data;
+	});
+
+	if ($(window).width() > 768) {
+		var carousel1_h = $(window).height() - $("#carousel1").height();
+		var hh = carousel1_h + "px";
+		if (carousel1_h >= 100) {
+			$("#carousel1").css("margin-top", "100px");
+		} else {
+			$("#carousel1").css("margin-top", hh);
+		}
+	}
+	$(".lingdao-resume>.pull-right").click(function(){
+		$(this).parent().children(".resume").toggleClass("open");
+		if($(this).text()=="展开"){
+			$(this).text("关闭");
+		}else{
+			$(this).text("展开");
+		}
+
+		
+	});
+
+       
+
+});
+
+$(window).on("scroll", function () {
+	$('.navbar').toggleClass('tiny', $(document).scrollTop() > 0);
+});
